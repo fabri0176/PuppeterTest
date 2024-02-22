@@ -1,9 +1,11 @@
 import puppeteer from 'puppeteer';
 import ScraperHelper from '../Helpers/ScraperHelper.js';
+import InterfaceScraper from './InterfaceScraper.js';
 
 
-class ScraperValley {
+class ScraperValley extends InterfaceScraper {
     constructor({ baseUrl = null, drawLimit = null, }) {
+        super();
         this.inputs = {
             TABLE_RESULTS: '.table.table-bordered.views-table.cols-6'
         };

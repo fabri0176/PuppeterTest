@@ -1,8 +1,11 @@
 import * as cheerio from 'cheerio';
 import fetch from 'node-fetch';
+import InterfaceScraper from './InterfaceScraper.js';
 
-class ScraperValleRequest {
+class ScraperValleRequest extends InterfaceScraper {
+
     constructor({ baseUrl = null, drawLimit = null, }) {
+        super();
         this.inputs = {
             TABLE_RESULTS: '.table.table-bordered.views-table.cols-6'
         };
