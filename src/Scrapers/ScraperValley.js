@@ -32,7 +32,10 @@ class ScraperValley extends InterfaceScraper {
             if (nPage === 100) {
                 continueProcess = false;
             }
-            await page.waitForSelector(this.inputs.TABLE_RESULTS);
+            await page.waitForSelector(this.inputs.TABLE_RESULTS, {
+                visible: true,
+            });
+
             const rows = await page.$$(this.inputs.TABLE_RESULTS + ' tbody tr');
             for (const row of rows) {
                 const columns = await row.$$('td');
@@ -51,10 +54,14 @@ class ScraperValley extends InterfaceScraper {
                 console.log(column);
                 this.result = [...this.result, column];
             }
-            await page.waitForSelector('.pagination.pager');
+            await page.waitForSelector('.pagination.pager', {
+                visible: true
+            });
+            await page.screenshot({ path: `page${nPage}.png` });
             await page.goto(`${this.baseUrl}/resultados?page=${nPage}`);
         } while (continueProcess);
-        await page.screenshot({ path: 'example.png' });
+        await page.close();
+        await browser.close();
         return this.result;
     }
 }
