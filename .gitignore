@@ -5,3 +5,4 @@ example.png
 package-lock.json
 myDataBase.json
 *.png
+.vscode/
