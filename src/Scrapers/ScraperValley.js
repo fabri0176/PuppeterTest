@@ -39,6 +39,9 @@ class ScraperValley extends InterfaceScraper {
             const rows = await page.$$(this.inputs.TABLE_RESULTS + ' tbody tr');
             for (const row of rows) {
                 const columns = await row.$$('td');
+                if (!Array.isArray(columns) || columns.length === 3) {
+                    continue;
+                }
                 const [col1, col2, col3] = columns;
                 const sorteo = await page.evaluate(el => el.textContent, col1);
                 const numero = await page.evaluate(el => el.textContent, col2);
